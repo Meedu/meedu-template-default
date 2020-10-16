@@ -6,6 +6,17 @@ export default ({ app: { $request } }, inject) => {
             },
             CaptchaImage() {
                 return $request.get('/api/v2/captcha/image');
+            },
+            SendSms(params) {
+                return $request.post('/api/v2/captcha/sms', params);
+            }
+        },
+        Auth: {
+            LoginPassword(params) {
+                return $request.post('/api/v2/login/password', params);
+            },
+            LoginSms(params) {
+                return $request.post('/api/v2/login/sms', params);
             }
         }
     })

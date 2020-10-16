@@ -46,16 +46,16 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-5">
+      <div class="col-4">
         <div class="login-box">
-          <div class="title">账号注册</div>
+          <div class="title">快速注册</div>
           <div class="form-group">
             <label>手机号</label>
             <input
               type="text"
-              name="mobile"
               class="form-control"
               placeholder="手机号"
+              v-model="form.mobile"
               required
             />
           </div>
@@ -69,11 +69,12 @@
                     name="captcha"
                     placeholder="验证码"
                     class="form-control"
+                    v-model="form.captchaImage"
                     required
                   />
                   <div class="input-group-append">
                     <img
-                      :src="captchatImage.img"
+                      :src="captchaImage.img"
                       @click="switchCaptcha"
                       class="captcha"
                       width="120"
@@ -94,15 +95,19 @@
                     name="sms_captcha"
                     placeholder="手机验证码"
                     class="form-control"
+                    v-model="form.sms"
                     required
                   />
                   <div class="input-group-append">
                     <button
                       type="button"
                       style="width: 120px"
-                      class="send-sms-captcha btn btn-primary"
+                      class="btn btn-primary"
+                      :disabled="sms.loading"
+                      @click="sendSmsCode"
                     >
-                      发送验证码
+                      <span v-if="sms.loading">{{ sms.current }}s</span>
+                      <span v-else>发送验证码</span>
                     </button>
                   </div>
                 </div>
@@ -110,26 +115,17 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="password">密码</label>
-            <input
-              id="password"
-              type="password"
-              class="form-control"
-              placeholder="密码"
-              name="password"
-              required
-            />
-          </div>
-          <div class="form-group">
             <label
-              ><input type="checkbox" name="agree_protocol" /> 同意
+              ><input type="checkbox" v-model="form.agree" /> 同意
               <a href="" target="_blank">《用户协议》</a>
               和
               <a href="" target="_blank">《隐私政策》</a></label
             >
           </div>
           <div class="form-group mt-2">
-            <button class="btn btn-primary btn-block">注册</button>
+            <button class="btn btn-primary btn-block" @click="registerHandker">
+              注册
+            </button>
           </div>
         </div>
         <div class="other-box">
@@ -145,9 +141,20 @@ export default {
   layout: "app",
   data() {
     return {
-      captchatImage: {
+      captchaImage: {
         key: "",
         img: "",
+      },
+      sms: {
+        loading: false,
+        max: 120,
+        current: 120,
+      },
+      form: {
+        mobile: "",
+        sms: "",
+        captchaImage: "",
+        agree: false,
       },
     };
   },
@@ -165,21 +172,84 @@ export default {
     });
 
     return {
-      captchatImage: captcha,
+      captchaImage: captcha,
     };
   },
   head() {
     return {
-      title: "注册",
+      title: "快速注册",
     };
   },
   methods: {
     switchCaptcha() {
       this.$api.Base.CaptchaImage().then((res) => {
         if (res.code === 0) {
-          this.captchatImage.key = res.data.key;
-          this.captchatImage.img = res.data.img;
+          this.captchaImage.key = res.data.key;
+          this.captchaImage.img = res.data.img;
         }
+      });
+    },
+    registerHandker() {
+      if (this.form.mobile.length !== 11) {
+        this.$toast.error("请输入手机号");
+        return;
+      }
+      if (this.form.sms.length === 0) {
+        this.$toast.error("请输入短信验证码");
+        return;
+      }
+      if (!this.form.agree) {
+        this.$toast.error("请同意用户协议");
+        return;
+      }
+      this.$api.Auth.LoginSms({
+        mobile: this.form.mobile,
+        mobile_code: this.form.sms,
+      }).then((res) => {
+        if (res.code !== 0) {
+          this.$toast.error(res.message);
+          return;
+        }
+        // 登录成功
+      });
+    },
+    sendSmsCode() {
+      if (this.sms.loading) {
+        // 验证码已发送，冷却时间内
+        return;
+      }
+      if (this.form.mobile.length !== 11) {
+        this.$toast.error("请输入手机号");
+        return;
+      }
+      if (this.form.captchaImage.length === 0) {
+        this.$toast.error("请输入图形验证码");
+        return;
+      }
+      this.$api.Base.SendSms({
+        mobile: this.form.mobile,
+        image_captcha: this.form.captchaImage,
+        image_key: this.captchaImage.key,
+        scene: "register",
+      }).then((res) => {
+        if (res.code !== 0) {
+          this.$toast.error(res.message);
+          return;
+        }
+        this.sms.loading = true;
+        window.SmsInterval = setInterval(() => {
+          if (this.sms.loading === false) {
+            clearInterval(window.SmsInterval);
+            return;
+          }
+          if (this.sms.current > 0) {
+            this.sms.current--;
+          } else {
+            this.sms.loading = false;
+            this.sms.current = this.sms.max;
+            clearInterval(window.SmsInterval);
+          }
+        }, 1000);
       });
     },
   },

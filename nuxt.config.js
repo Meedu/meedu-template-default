@@ -38,6 +38,8 @@ export default {
     '@nuxtjs/axios',
     // cookie模块，用来记录token
     'cookie-universal-nuxt',
+    // notification
+    ["vue-toastification/nuxt", { position: 'top-center' }]
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
