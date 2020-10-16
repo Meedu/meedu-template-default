@@ -14,10 +14,14 @@ export default {
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
+    './assets/css/app.less'
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    './plugins/axios.js',
+    './plugins/request.js',
+    './plugins/api.js',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -31,6 +35,9 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
+    '@nuxtjs/axios',
+    // cookie模块，用来记录token
+    'cookie-universal-nuxt',
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
