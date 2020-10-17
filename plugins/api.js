@@ -17,6 +17,12 @@ export default ({ app: { $request } }, inject) => {
             },
             LoginSms(params) {
                 return $request.post('/api/v2/login/sms', params);
+            },
+            RegisterSms(params) {
+                return $request.post('/api/v2/register/sms', params);
+            },
+            PasswordReset(params) {
+                return $request.post('/api/v2/password/reset', params);
             }
         }
     })

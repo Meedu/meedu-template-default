@@ -164,7 +164,7 @@
   <div class="main-body">
     <div class="logo-box">
       <nuxt-link to="/">
-        <img src="~assets/images/white-logo.png" width="140" height="37"
+        <img src="~assets/images/white-logo.png" width="140" height="42"
       /></nuxt-link>
     </div>
     <div class="login-box">

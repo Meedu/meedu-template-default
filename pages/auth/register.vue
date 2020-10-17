@@ -1,136 +1,252 @@
 <style lang="less" scoped>
-.login-box {
+.main-body {
   width: 100%;
+  height: 100vh;
+  background: url("~assets/images/bg.jpg") no-repeat;
+  background-size: cover;
+}
+
+.logo-box {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  margin-left: -70px;
+  width: 140px;
+  height: 37px;
+}
+
+.login-box {
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  margin-left: -200px;
+  z-index: 11;
+  width: 400px;
   height: auto;
-  float: left;
-  margin-top: 100px;
-  padding: 30px 30px 20px 30px;
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.05);
 
   .title {
     width: 100%;
     height: auto;
     float: left;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 15px 30px;
     text-align: center;
-    margin-bottom: 30px;
     font-size: 20px;
-    color: #000;
-    font-weight: 600;
+    color: #333;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .body {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding: 30px 30px 0 30px;
   }
 
   .form-group {
     width: 100%;
     height: auto;
     float: left;
+    margin-bottom: 0;
 
-    label {
+    &.protocol {
       font-size: 14px;
-      color: rgba(0, 0, 0, 0.7);
+      color: #999999;
+      margin-bottom: 15px;
+
+      a {
+        color: #999999;
+
+        &:hover {
+          color: #333333;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .input-form-item {
+    width: 100%;
+    height: 42px;
+    float: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #666666;
+    font-size: 14px;
+    border: 1px solid #dddddd;
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    margin-bottom: 20px;
+
+    &:focus {
+      background-color: white;
+      outline: none;
+    }
+  }
+
+  .auth-button,
+  .send-sms-button {
+    width: 100%;
+    height: 42px;
+    float: left;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #eeeeee;
+    text-align: center;
+    outline: none;
+    background-color: #eeeeee;
+    color: #bbbbbb;
+    border-radius: 4px;
+
+    &.active {
+      color: white;
+      background-color: rgba(40, 177, 138, 1);
+      border: 1px solid rgba(50, 180, 138, 1);
+
+      &:hover {
+        background-color: rgba(40, 177, 138, 0.8);
+      }
+    }
+  }
+
+  .send-sms-button {
+    width: 120px;
+  }
+
+  .other-buttons {
+    width: 100%;
+    height: auto;
+    float: left;
+    margin-bottom: 30px;
+    text-align: right;
+    color: #999999;
+    font-size: 14px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    a {
+      color: #999999;
+
+      &:hover {
+        color: #333333;
+        text-decoration: none;
+      }
     }
   }
 }
-
-.other-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  margin-top: 15px;
-  margin-bottom: 150px;
-  padding-left: 30px;
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.7);
-}
 </style>
 <template>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-4">
-        <div class="login-box">
-          <div class="title">快速注册</div>
-          <div class="form-group">
-            <label>手机号</label>
+  <div class="main-body">
+    <div class="logo-box">
+      <nuxt-link to="/">
+        <img src="~assets/images/white-logo.png" width="140" height="42"
+      /></nuxt-link>
+    </div>
+
+    <div class="login-box">
+      <div class="title">快速注册</div>
+      <div class="body">
+        <div class="form-group">
+          <input
+            type="text"
+            class="input-form-item"
+            placeholder="手机号"
+            v-model="form.mobile"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <div class="input-group">
             <input
               type="text"
-              class="form-control"
-              placeholder="手机号"
-              v-model="form.mobile"
+              placeholder="验证码"
+              class="input-form-item"
+              v-model="form.captchaImage"
+              style="width: 120px; margin-right: 15px"
               required
             />
-          </div>
-          <div class="form-group">
-            <label>验证码</label>
-            <div class="row">
-              <div class="col">
-                <div class="input-group">
-                  <input
-                    type="text"
-                    name="captcha"
-                    placeholder="验证码"
-                    class="form-control"
-                    v-model="form.captchaImage"
-                    required
-                  />
-                  <div class="input-group-append">
-                    <img
-                      :src="captchaImage.img"
-                      @click="switchCaptcha"
-                      class="captcha"
-                      width="120"
-                      height="38"
-                    />
-                  </div>
-                </div>
-              </div>
+            <div class="input-group-append">
+              <img
+                :src="captchaImage.img"
+                @click="switchCaptcha"
+                class="captcha"
+                width="120"
+                height="42"
+              />
             </div>
           </div>
-          <div class="form-group">
-            <label>手机验证码</label>
-            <div class="row">
-              <div class="col">
-                <div class="input-group">
-                  <input
-                    type="text"
-                    name="sms_captcha"
-                    placeholder="手机验证码"
-                    class="form-control"
-                    v-model="form.sms"
-                    required
-                  />
-                  <div class="input-group-append">
-                    <button
-                      type="button"
-                      style="width: 120px"
-                      class="btn btn-primary"
-                      :disabled="sms.loading"
-                      @click="sendSmsCode"
-                    >
-                      <span v-if="sms.loading">{{ sms.current }}s</span>
-                      <span v-else>发送验证码</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <input
+              type="text"
+              placeholder="手机验证码"
+              class="input-form-item"
+              v-model="form.sms"
+              style="width: 120px; margin-right: 15px"
+              required
+            />
+            <div class="input-group-append">
+              <button
+                type="button"
+                style="width: 120px"
+                class="send-sms-button"
+                :class="{
+                  active: sms.loading === false && form.captchaImage.length > 0,
+                }"
+                :disabled="sms.loading || form.captchaImage.length === 0"
+                @click="sendSmsCode"
+              >
+                <span v-if="sms.loading">{{ sms.current }}s</span>
+                <span v-else>发送验证码</span>
+              </button>
             </div>
           </div>
-          <div class="form-group">
-            <label
-              ><input type="checkbox" v-model="form.agree" /> 同意
-              <a href="" target="_blank">《用户协议》</a>
-              和
-              <a href="" target="_blank">《隐私政策》</a></label
-            >
-          </div>
-          <div class="form-group mt-2">
-            <button class="btn btn-primary btn-block" @click="registerHandker">
-              注册
-            </button>
-          </div>
         </div>
-        <div class="other-box">
-          已经有账号？<nuxt-link to="/auth/login">立即登录</nuxt-link>
+        <div class="form-group">
+          <input
+            type="password"
+            class="input-form-item"
+            placeholder="密码"
+            v-model="form.password"
+            required
+          />
         </div>
+        <div class="form-group protocol">
+          <label
+            ><input type="checkbox" v-model="form.agree" /> 同意
+            <a href="" target="_blank">《用户协议》</a>
+            和
+            <a href="" target="_blank">《隐私政策》</a></label
+          >
+        </div>
+        <div class="form-group">
+          <button
+            class="auth-button"
+            :class="{
+              active:
+                form.mobile.length > 0 &&
+                form.sms.length > 0 &&
+                form.agree &&
+                form.password.length > 0,
+            }"
+            :disabled="
+              form.mobile.length === 0 ||
+              form.sms.length === 0 ||
+              !form.agree ||
+              form.password.length === 0
+            "
+            @click="registerHandker"
+          >
+            注册
+          </button>
+        </div>
+      </div>
+      <div class="other-buttons">
+        <nuxt-link to="/auth/login">登录</nuxt-link>
       </div>
     </div>
   </div>
@@ -138,7 +254,6 @@
 
 <script>
 export default {
-  layout: "app",
   data() {
     return {
       captchaImage: {
@@ -155,6 +270,7 @@ export default {
         sms: "",
         captchaImage: "",
         agree: false,
+        password: "",
       },
     };
   },
@@ -198,19 +314,28 @@ export default {
         this.$toast.error("请输入短信验证码");
         return;
       }
+      if (this.form.password.length === 0) {
+        this.$toast.error("请输入密码");
+        return;
+      }
       if (!this.form.agree) {
         this.$toast.error("请同意用户协议");
         return;
       }
-      this.$api.Auth.LoginSms({
+      this.$api.Auth.RegisterSms({
         mobile: this.form.mobile,
         mobile_code: this.form.sms,
+        password: this.form.password,
       }).then((res) => {
         if (res.code !== 0) {
           this.$toast.error(res.message);
           return;
         }
-        // 登录成功
+        // 注册成功
+        this.$toast.success("注册成功");
+        setTimeout(() => {
+          this.$router.push("/auth/login");
+        }, 500);
       });
     },
     sendSmsCode() {
