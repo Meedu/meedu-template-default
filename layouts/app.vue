@@ -1,4 +1,6 @@
-<style lang="less" scoped>
+<style lang="scss" scoped>
+@import "~/assets/scss/var";
+
 nav {
   width: 100%;
   height: 70px;
@@ -46,7 +48,7 @@ nav {
 
           &.active {
             a {
-              color: #0b76de;
+              color: $primary;
             }
           }
         }
@@ -72,7 +74,7 @@ nav {
         color: rgba(0, 0, 0, 0.7);
 
         &:focus {
-          border: 1px solid #0b76de;
+          border: 1px solid $primary;
           outline: none;
         }
       }
@@ -88,11 +90,11 @@ nav {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         font-size: 14px;
-        background-color: #0b76de;
+        background-color: $primary;
         color: white;
 
         &:hover {
-          background-color: rgba(11, 118, 222, 0.8);
+          background-color: rgba($primary, 0.8);
         }
       }
     }
@@ -113,7 +115,7 @@ nav {
           width: 80px;
           height: 34px;
           border-radius: 17px;
-          background-color: rgba(11, 118, 222, 1);
+          background-color: $primary;
           text-align: center;
           line-height: 34px;
           font-size: 14px;
@@ -123,13 +125,14 @@ nav {
 
         &:hover {
           span {
-            background-color: rgba(11, 118, 222, 0.8);
+            background-color: rgba($primary, 0.8);
           }
         }
       }
     }
   }
 }
+
 footer {
   width: 100%;
   height: auto;

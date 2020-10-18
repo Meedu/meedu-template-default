@@ -1,3 +1,6 @@
+@import 'var';
+
+
 body {
     background-color: #f8fafb;
     font-family: PingFang SC, Microsoft YaHei, HanHei SC, Helvetica Neue,
@@ -8,3 +11,5 @@ body {
 a {
     text-decoration: none;
 }
+
+@import "~bootstrap/scss/bootstrap";
