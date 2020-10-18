@@ -28,6 +28,27 @@ export default ({ app: { $request } }, inject) => {
         Member: {
             Detail() {
                 return $request.get('/api/v2/member/detail');
+            },
+            Courses(params) {
+                return $request.get('/api/v2/member/courses', params);
+            },
+            LikeCourses(params) {
+                return $request.get('/api/v2/member/courses/like', params);
+            },
+            HistoryCourses(params) {
+                return $request.get('/api/v2/member/courses/history', params);
+            },
+            Videos(params) {
+                return $request.get('/api/v2/member/videos', params);
+            },
+            Orders(params) {
+                return $request.get('/api/v2/member/orders', params);
+            },
+            Roles(params) {
+                return $request.get('/api/v2/member/roles', params);
+            },
+            Notifications(params) {
+                return $request.get('/api/v2/member/messages', params);
             }
         }
     })
