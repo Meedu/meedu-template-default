@@ -73,7 +73,10 @@ export default ({ app: { $request } }, inject) => {
             },
             NotificationMarkAsRead(id) {
                 return $request.get('/api/v2/member/notificationMarkAsRead/' + id);
-            }
+            },
+            Credit1Records(params) {
+                return $request.get('/api/v2/member/credit1Records', params);
+            },
         }
     })
 }

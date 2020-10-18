@@ -255,7 +255,7 @@ nav {
                 <nuxt-link class="menu-item" to="/member/invite"
                   >我的邀请</nuxt-link
                 >
-                <nuxt-link class="menu-item" to="/member/credti1"
+                <nuxt-link class="menu-item" to="/member/credit1"
                   >我的积分</nuxt-link
                 >
                 <nuxt-link class="menu-item" to="/member/notification"

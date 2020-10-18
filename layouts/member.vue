@@ -125,7 +125,7 @@
                     <nuxt-link to="/member/invite">我的邀请</nuxt-link>
                   </li>
                   <li :class="{ active: $route.name === 'member-credit1' }">
-                    <nuxt-link to="/member/credti1">我的积分</nuxt-link>
+                    <nuxt-link to="/member/credit1">我的积分</nuxt-link>
                   </li>
                   <li
                     :class="{ active: $route.name === 'member-notifications' }"
