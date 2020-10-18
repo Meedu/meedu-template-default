@@ -159,50 +159,6 @@
     }
   }
 }
-
-.paginations {
-  width: 100%;
-  height: auto;
-  float: left;
-  text-align: right;
-  margin-top: 15px;
-
-  .page-no {
-    display: inline-block;
-    width: 50px;
-    height: auto;
-    line-height: 44px;
-    text-align: center;
-    color: #333333;
-    margin-left: 15px;
-  }
-
-  .prev-button,
-  .next-button {
-    display: inline-block;
-    width: 120px;
-    height: auto;
-    line-height: 44px;
-    background-color: $primary;
-    color: white;
-    text-align: center;
-    border-radius: 22px;
-    cursor: pointer;
-    border: 0;
-    outline: none;
-    margin-left: 15px;
-
-    &:hover {
-      background-color: rgba($primary, 0.8);
-      text-decoration: none;
-    }
-
-    &.disabled {
-      background-color: rgba(0, 0, 0, 0.1);
-      color: rgba(0, 0, 0, 0.2);
-    }
-  }
-}
 </style>
 <template>
   <div class="meedu-panel">
@@ -260,25 +216,7 @@
         </template>
       </div>
 
-      <div class="paginations" v-if="data.length > 0">
-        <button
-          class="prev-button"
-          :class="{ disabled: pagination.page === 1 }"
-          :disabled="pagination.page === 1"
-          @click="pagination.page--"
-        >
-          上一页
-        </button>
-        <div class="page-no">第{{ pagination.page }}页</div>
-        <button
-          class="next-button"
-          :class="{ disabled: !hasNext }"
-          :disabled="!hasNext"
-          @click="pagination.page++"
-        >
-          下一页
-        </button>
-      </div>
+      <pagination v-model="pagination.page" :has-next="hasNext"></pagination>
     </div>
   </div>
 </template>
