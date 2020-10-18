@@ -34,7 +34,7 @@ nav {
           line-height: 70px;
           list-style: none;
           font-size: 16px;
-          padding: 0 8px;
+          padding: 0 10px;
 
           a {
             color: #333333;
@@ -64,6 +64,7 @@ nav {
         height: 40px;
         float: left;
         border: 1px solid rgba(0, 0, 0, 0.2);
+        border-right: 0;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
         line-height: 40px;
@@ -73,6 +74,7 @@ nav {
 
         &:focus {
           border: 1px solid $primary;
+          border-right: 0;
           outline: none;
         }
       }
