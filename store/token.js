@@ -6,7 +6,7 @@ export const mutations = {
     set(state, token) {
         state.token = token;
     },
-    empty(state) {
+    remove(state) {
         state.token = ''
     }
 }

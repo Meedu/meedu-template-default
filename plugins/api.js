@@ -16,7 +16,7 @@ export default ({ app: { $request } }, inject) => {
                 return $request.post('/api/v2/login/password', params);
             },
             LoginSms(params) {
-                return $request.post('/api/v2/login/sms', params);
+                return $request.post('/api/v2/login/mobile', params);
             },
             RegisterSms(params) {
                 return $request.post('/api/v2/register/sms', params);

@@ -155,7 +155,7 @@
               <img
                 :src="captchaImage.img"
                 class="captcha"
-                @click="switchCaptcha"
+                @click="getImageCaptcha"
                 width="120"
                 height="42"
               />
@@ -271,25 +271,11 @@ export default {
       },
     };
   },
-  async asyncData({ app, params, store }) {
-    let captcha = await app.$api.Base.CaptchaImage().then((res) => {
-      let result = {
-        key: "",
-        img: "",
-      };
-      if (res.code === 0) {
-        result.key = res.data.key;
-        result.img = res.data.img;
-      }
-      return result;
-    });
-
-    return {
-      captchaImage: captcha,
-    };
+  mounted() {
+    this.getImageCaptcha();
   },
   methods: {
-    switchCaptcha() {
+    getImageCaptcha() {
       this.$api.Base.CaptchaImage().then((res) => {
         if (res.code === 0) {
           this.captchaImage.key = res.data.key;
@@ -314,7 +300,7 @@ export default {
         mobile: this.form.mobile,
         image_captcha: this.form.captchaImage,
         image_key: this.captchaImage.key,
-        scene: "register",
+        scene: "password_reset",
       }).then((res) => {
         if (res.code !== 0) {
           this.$toast.error(res.message);

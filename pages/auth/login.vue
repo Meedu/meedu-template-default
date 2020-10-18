@@ -223,6 +223,7 @@
             type="text"
             class="input-form-item"
             placeholder="手机号"
+            name="mobile"
             v-model="smsLogin.mobile"
             required
           />
@@ -241,7 +242,7 @@
             <div class="input-group-append">
               <img
                 :src="captchaImage.img"
-                @click="switchCaptcha"
+                @click="getCaptchaImage"
                 class="captcha"
                 width="120"
                 height="38"
@@ -333,39 +334,30 @@ export default {
       },
     };
   },
-  async asyncData({ app, params, store }) {
-    let captcha = await app.$api.Base.CaptchaImage().then((res) => {
-      let result = {
-        key: "",
-        img: "",
-      };
-      if (res.code === 0) {
-        result.key = res.data.key;
-        result.img = res.data.img;
-      }
-      return result;
-    });
-
-    return {
-      captchaImage: captcha,
-    };
-  },
   head() {
     return {
       title: "登录",
     };
   },
+  mounted() {
+    // 登录后跳转
+    let redirect = this.$route.query.redirect;
+    if (redirect) {
+      this.$cookies.set("redirect", redirect);
+    }
+    // 获取验证码
+    this.getCaptchaImage();
+  },
   methods: {
-    switchCaptcha() {
+    getCaptchaImage() {
       this.$api.Base.CaptchaImage().then((res) => {
-        if (res.code === 0) {
-          this.captchaImage.key = res.data.key;
-          this.captchaImage.img = res.data.img;
+        if (res.code !== 0) {
+          this.$toast.error("获取图形验证码失败");
+          return;
         }
+        this.captchaImage.key = res.data.key;
+        this.captchaImage.img = res.data.img;
       });
-    },
-    switchTab() {
-      this.tab = this.tab === "password" ? "sms" : "password";
     },
     smsLoginHandler() {
       if (this.smsLogin.mobile.length !== 11) {
@@ -377,15 +369,15 @@ export default {
         return;
       }
       this.$api.Auth.LoginSms({
-        mobile: this.form.mobile,
-        mobile_code: this.form.sms,
+        mobile: this.smsLogin.mobile,
+        mobile_code: this.smsLogin.sms,
       }).then((res) => {
         if (res.code !== 0) {
           this.$toast.error(res.message);
           return;
         }
         // 登录成功
-        this.$toast.success("登录成功");
+        this.loginSuccessCallback(res.data.token);
       });
     },
     loginHandler() {
@@ -397,17 +389,23 @@ export default {
         this.$toast.error("请输入密码");
         return;
       }
-      this.$api.Auth.LoginPassword({
-        mobile: this.form.mobile,
-        password: this.form.password,
-      }).then((res) => {
+      this.$api.Auth.LoginPassword(this.form).then((res) => {
         if (res.code !== 0) {
           this.$toast.error(res.message);
           return;
         }
-
-        this.$toast.success("登录成功");
+        // 登录成功
+        this.loginSuccessCallback(res.data.token);
       });
+    },
+    loginSuccessCallback(token) {
+      this.$toast.success("登录成功");
+      this.$utils.loginHandler(this, token);
+      let redirect = this.$cookies.get("redirect");
+      if (!redirect) {
+        redirect = "/";
+      }
+      this.$router.push(redirect);
     },
     sendSmsCode() {
       if (this.sms.loading) {
@@ -426,7 +424,7 @@ export default {
         mobile: this.smsLogin.mobile,
         image_captcha: this.smsLogin.captchaImage,
         image_key: this.captchaImage.key,
-        scene: "register",
+        scene: "login",
       }).then((res) => {
         if (res.code !== 0) {
           this.$toast.error(res.message);

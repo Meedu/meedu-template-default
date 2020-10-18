@@ -171,7 +171,7 @@
             <div class="input-group-append">
               <img
                 :src="captchaImage.img"
-                @click="switchCaptcha"
+                @click="getImageCaptcha"
                 class="captcha"
                 width="120"
                 height="42"
@@ -274,30 +274,16 @@ export default {
       },
     };
   },
-  async asyncData({ app, params, store }) {
-    let captcha = await app.$api.Base.CaptchaImage().then((res) => {
-      let result = {
-        key: "",
-        img: "",
-      };
-      if (res.code === 0) {
-        result.key = res.data.key;
-        result.img = res.data.img;
-      }
-      return result;
-    });
-
-    return {
-      captchaImage: captcha,
-    };
-  },
   head() {
     return {
       title: "快速注册",
     };
   },
+  mounted() {
+    this.getImageCaptcha();
+  },
   methods: {
-    switchCaptcha() {
+    getImageCaptcha() {
       this.$api.Base.CaptchaImage().then((res) => {
         if (res.code === 0) {
           this.captchaImage.key = res.data.key;

@@ -22,6 +22,7 @@ export default {
     './plugins/axios.js',
     './plugins/request.js',
     './plugins/api.js',
+    './plugins/vue-global.js',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
