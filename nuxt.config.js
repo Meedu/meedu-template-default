@@ -35,11 +35,19 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     '@nuxtjs/axios',
+    // scss全局变量共享
+    '@nuxtjs/style-resources',
     // cookie模块，用来记录token
     'cookie-universal-nuxt',
     // notification
     ["vue-toastification/nuxt", { position: 'top-center' }]
   ],
+
+  styleResources: {
+    scss: [
+      '~/assets/scss/var.scss'
+    ]
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

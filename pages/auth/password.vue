@@ -88,11 +88,11 @@
 
     &.active {
       color: white;
-      background-color: rgba(40, 177, 138, 1);
-      border: 1px solid rgba(50, 180, 138, 1);
+      background-color: $primary;
+      border: 1px solid $primary;
 
       &:hover {
-        background-color: rgba(40, 177, 138, 0.8);
+        background-color: rgba($primary, 0.8);
       }
     }
   }

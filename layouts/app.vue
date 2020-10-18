@@ -1,6 +1,4 @@
 <style lang="scss" scoped>
-@import "~/assets/scss/var";
-
 nav {
   width: 100%;
   height: 70px;
