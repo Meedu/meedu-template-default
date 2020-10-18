@@ -49,7 +49,25 @@ export default ({ app: { $request } }, inject) => {
             },
             Notifications(params) {
                 return $request.get('/api/v2/member/messages', params);
-            }
+            },
+            PromoCode() {
+                return $request.get('/api/v2/member/promoCode');
+            },
+            PromoCodeCreate() {
+                return $request.post('/api/v2/member/promoCode');
+            },
+            InviteUsers(params) {
+                return $request.get('/api/v2/member/inviteUsers', params);
+            },
+            InviteBalanceRecords(params) {
+                return $request.get('/api/v2/member/inviteBalanceRecords', params);
+            },
+            WithdrawRecords(params) {
+                return $request.get('/api/v2/member/withdrawRecords', params);
+            },
+            Withdraw(params) {
+                return $request.post('/api/v2/member/withdraw', params);
+            },
         }
     })
 }

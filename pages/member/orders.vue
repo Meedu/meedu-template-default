@@ -59,7 +59,7 @@
 </style>
 <template>
   <div class="meedu-panel">
-    <div class="title">我的订单</div>
+    <div class="title"><div class="text">我的订单</div></div>
     <div class="body">
       <template v-if="data.length > 0">
         <div class="order-item" v-for="order in data" :key="order.id">

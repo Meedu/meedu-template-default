@@ -162,7 +162,9 @@
 </style>
 <template>
   <div class="meedu-panel">
-    <div class="title">我的课程</div>
+    <div class="title">
+      <div class="text">我的课程</div>
+    </div>
     <div class="body">
       <div class="tabs">
         <div
