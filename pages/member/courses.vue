@@ -223,6 +223,11 @@
 <script>
 export default {
   layout: "member",
+  head() {
+    return {
+      title: "我的课程",
+    };
+  },
   data() {
     return {
       tab: "courses",

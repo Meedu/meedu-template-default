@@ -80,6 +80,11 @@
 <script>
 export default {
   layout: "member",
+  head() {
+    return {
+      title: "我的订单",
+    };
+  },
   data() {
     return {
       pagination: {

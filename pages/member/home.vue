@@ -83,6 +83,11 @@
 <script>
 export default {
   layout: "member",
+  head() {
+    return {
+      title: "我的资料",
+    };
+  },
   data() {
     return {
       user: null,
