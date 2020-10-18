@@ -1,4 +1,8 @@
 export default {
+  router: {
+    middleware: ['user']
+  },
+
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'meedu-template-default',

@@ -8,3 +8,56 @@ body {
         Open Sans, Arial, Hiragino Sans GB, "\5FAE\8F6F\96C5\9ED1", STHeiti,
         WenQuanYi Micro Hei, SimSun, sans-serif, HYWenHei-GEW;
 }
+
+.meedu-panel {
+    width: 100%;
+    height: auto;
+    float: left;
+
+    >.title {
+        width: 100%;
+        height: auto;
+        float: left;
+        display: flex;
+        padding: 20px 30px;
+        border-bottom: 1px solid rgb(234, 240, 238);
+
+        .text {
+            flex: 1;
+            text-align: left;
+            color: rgb(51, 51, 51);
+            font-size: 16px;
+            line-height: 1;
+            font-weight: 500;
+        }
+
+        .right-menu {
+            width: auto;
+            height: auto;
+            float: left;
+            text-align: right;
+            font-size: 14px;
+            line-height: 16px;
+            color: #999999;
+
+            a {
+                color: $primary;
+
+                &:hover {
+                    color: rgba($primary, .9);
+                }
+            }
+        }
+    }
+
+    .body {
+        width: 100%;
+        height: auto;
+        float: left;
+        padding: 30px;
+    }
+}
+
+.br-50 {
+    border-radius: 50%;
+}
