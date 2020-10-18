@@ -9,6 +9,9 @@ export default function (context) {
             app.$utils.logout(context);
             redirect('/auth/login');
         } else {
+            // 删除cookie
+            // app.$cookies.remove('token');
+            // 登出
             store.commit('auth/set', res.data);
         }
     })
