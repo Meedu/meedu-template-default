@@ -246,6 +246,7 @@
 
 <script>
 export default {
+  middleware: ["guest"],
   head() {
     return {
       title: "找回密码",

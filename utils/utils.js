@@ -11,10 +11,8 @@ export default {
         }
         if ($cookies && $store) {
             // cookie token
-            let expiredAt = new Date(Date.now() + 8.64e7 * 365 * 10);
-            $cookies.set('token', token, { expiredAt })
-            // store
-            $store.commit('token/set', token);
+            $cookies.set('token', token, { maxAge: 60 * 60 * 24 * 7, path: '/' })
+            $store.commit('auth/comein');
         }
     },
     logout(ctx) {
@@ -28,8 +26,8 @@ export default {
         }
         if ($cookies && $store) {
             $cookies.remove('token');
-            // store
-            $store.commit('token/remove');
+            $store.commit('auth/comeout');
+            window.location.href = '/';
         }
     }
 }

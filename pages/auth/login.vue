@@ -311,6 +311,7 @@
 
 <script>
 export default {
+  middleware: ["guest"],
   data() {
     return {
       tab: "password",
@@ -403,7 +404,7 @@ export default {
       this.$utils.loginHandler(this, token);
       let redirect = this.$cookies.get("redirect");
       if (!redirect) {
-        redirect = "/";
+        redirect = "/member/home";
       }
       this.$router.push(redirect);
     },

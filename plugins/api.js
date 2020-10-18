@@ -24,6 +24,11 @@ export default ({ app: { $request } }, inject) => {
             PasswordReset(params) {
                 return $request.post('/api/v2/password/reset', params);
             }
+        },
+        Member: {
+            Detail() {
+                return $request.get('/api/v2/member/detail');
+            }
         }
     })
 }
