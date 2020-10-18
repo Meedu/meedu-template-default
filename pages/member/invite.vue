@@ -80,35 +80,6 @@
   }
 }
 
-.common-item {
-  width: 100%;
-  height: auto;
-  float: left;
-  padding: 15px 30px;
-  border-radius: 33px;
-  background-color: rgba(0, 0, 0, 0.02);
-  display: flex;
-  cursor: pointer;
-  font-size: 15px;
-  color: rgba(0, 0, 0, 0.7);
-  line-height: 36px;
-  margin-top: 15px;
-
-  .mobile {
-    flex: 1;
-    text-align: left;
-  }
-
-  .date {
-    flex: 1;
-    text-align: right;
-  }
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-  }
-}
-
 .invite-user-item {
   .mobile {
     flex: 1;

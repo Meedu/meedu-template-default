@@ -68,6 +68,12 @@ export default ({ app: { $request } }, inject) => {
             Withdraw(params) {
                 return $request.post('/api/v2/member/withdraw', params);
             },
+            NotificationMarkAllAsRead() {
+                return $request.get('/api/v2/member/notificationMarkAllAsRead');
+            },
+            NotificationMarkAsRead(id) {
+                return $request.get('/api/v2/member/notificationMarkAsRead/' + id);
+            }
         }
     })
 }
