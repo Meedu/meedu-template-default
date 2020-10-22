@@ -111,7 +111,7 @@
           <div class="profile-item" v-else>
             <div class="title">会员</div>
             <div class="value">
-              免费会员 <nuxt-link to="/role/index">加入会员</nuxt-link>
+              免费会员 <nuxt-link to="/role">加入会员</nuxt-link>
             </div>
           </div>
 

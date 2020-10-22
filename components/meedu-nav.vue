@@ -237,7 +237,7 @@ nav {
             <nuxt-link
               class="login-item"
               to="/auth/login"
-              v-if="$store.state.auth.auth === false"
+              v-if="!$store.state.auth.user"
             >
               <span>登录</span>
             </nuxt-link>

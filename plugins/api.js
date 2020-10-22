@@ -89,6 +89,11 @@ export default ({ app: { $request } }, inject) => {
             Credit1Records(params) {
                 return $request.get('/api/v2/member/credit1Records', params);
             },
+        },
+        Role: {
+            Index() {
+                return $request.get('/api/v2/roles');
+            }
         }
     })
 }
