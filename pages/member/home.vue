@@ -95,8 +95,10 @@
             <div class="title">昵称</div>
             <div class="value">
               {{ user.nick_name }}
-              <a href="javascript:void(0)" v-if="user.is_set_nickname === 0"
-                >修改</a
+              <nuxt-link
+                to="/member/changeNickname"
+                v-if="user.is_set_nickname === 0"
+                >修改</nuxt-link
               >
             </div>
           </div>
@@ -146,7 +148,6 @@ export default {
     this.user = this.$store.state.auth.user;
   },
   methods: {
-    changeMobile() {},
     changeAvatar() {
       this.$refs.avatar.click();
     },

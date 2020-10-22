@@ -38,6 +38,9 @@ export default ({ app: { $request } }, inject) => {
             PasswordChange(params) {
                 return $request.post('/api/v2/member/detail/password', params);
             },
+            NicknameChange(params) {
+                return $request.post('/api/v2/member/detail/nickname', params);
+            },
             Courses(params) {
                 return $request.get('/api/v2/member/courses', params);
             },
