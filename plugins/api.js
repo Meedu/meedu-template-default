@@ -35,6 +35,9 @@ export default ({ app: { $request } }, inject) => {
             MobileChange(params) {
                 return $request.post('/api/v2/member/detail/mobile', params);
             },
+            PasswordChange(params) {
+                return $request.post('/api/v2/member/detail/password', params);
+            },
             Courses(params) {
                 return $request.get('/api/v2/member/courses', params);
             },

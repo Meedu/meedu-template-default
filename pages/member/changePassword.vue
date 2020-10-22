@@ -19,7 +19,7 @@
         <div class="change-mobile-box">
           <div class="meedu-panel">
             <div class="title">
-              <div class="text">绑定/更换手机号</div>
+              <div class="text">修改密码</div>
             </div>
             <div class="body">
               <div class="change-mobile-input-box">
@@ -89,18 +89,32 @@
                 </div>
 
                 <div class="form-group">
+                  <input
+                    type="text"
+                    class="input-form-item"
+                    placeholder="新密码"
+                    name="password"
+                    v-model="form.password"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
                   <button
                     type="button"
                     class="auth-button"
                     :class="{
                       active:
                         form.mobile.length === 11 &&
-                        form.mobile_code.length > 0,
+                        form.mobile_code.length > 0 &&
+                        form.password.length > 0,
                     }"
                     @click="handler"
                     :disabled="
                       !(
-                        form.mobile.length === 11 && form.mobile_code.length > 0
+                        form.mobile.length === 11 &&
+                        form.mobile_code.length > 0 &&
+                        form.password.length > 0
                       )
                     "
                   >
@@ -124,6 +138,7 @@ export default {
         mobile: "",
         captchaImage: "",
         mobile_code: "",
+        password: "",
       },
       captchaImage: {
         key: "",
@@ -167,7 +182,7 @@ export default {
         mobile: this.form.mobile,
         image_captcha: this.form.captchaImage,
         image_key: this.captchaImage.key,
-        scene: "mobile_bind",
+        scene: "password_reset",
       }).then((res) => {
         if (res.code !== 0) {
           this.$toast.error(res.message);
@@ -198,7 +213,11 @@ export default {
         this.$toast.error("请输入短信验证码");
         return;
       }
-      this.$api.Member.MobileChange(this.form).then((res) => {
+      if (this.form.password.length === 0) {
+        this.$toast.error("请输入密码");
+        return;
+      }
+      this.$api.Member.PasswordChange(this.form).then((res) => {
         if (res.code !== 0) {
           this.$toast.error(res.message);
           return;

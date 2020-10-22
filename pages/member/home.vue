@@ -119,7 +119,9 @@
               未设置
               <a href="" v-if="user.is_set_nickname === 0">设置密码</a>
             </div>
-            <div class="value" v-else>已设置 <a href="">修改密码</a></div>
+            <div class="value" v-else>
+              已设置 <nuxt-link to="/member/changePassword">修改密码</nuxt-link>
+            </div>
           </div>
         </div>
       </div>
