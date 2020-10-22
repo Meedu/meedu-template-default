@@ -139,13 +139,19 @@ nav {
         line-height: 70px;
         float: left;
         text-align: center;
-        color: #333333;
         cursor: pointer;
-        font-size: 14px;
 
-        img {
-          border-radius: 50%;
-          margin-right: 5px;
+        .text {
+          color: #333333;
+          font-size: 14px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          img {
+            border-radius: 50%;
+            margin-right: 5px;
+          }
         }
 
         &:hover {
@@ -236,12 +242,14 @@ nav {
               <span>登录</span>
             </nuxt-link>
             <div class="nickname" v-else>
-              <img
-                :src="$store.state.auth.user.avatar"
-                width="20"
-                height="20"
-              />
-              <span>{{ $store.state.auth.user.nick_name }}</span>
+              <div class="text">
+                <img
+                  :src="$store.state.auth.user.avatar"
+                  width="20"
+                  height="20"
+                />
+                <span>{{ $store.state.auth.user.nick_name }}</span>
+              </div>
               <div class="menu-box">
                 <nuxt-link class="menu-item" to="/member/home"
                   >我的资料</nuxt-link
