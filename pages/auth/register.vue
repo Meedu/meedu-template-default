@@ -68,54 +68,6 @@
     }
   }
 
-  .input-form-item {
-    width: 100%;
-    height: 42px;
-    float: left;
-    padding-left: 20px;
-    padding-right: 20px;
-    color: #666666;
-    font-size: 14px;
-    border: 1px solid #dddddd;
-    background-color: #f4f4f4;
-    border-radius: 4px;
-    margin-bottom: 20px;
-
-    &:focus {
-      background-color: white;
-      outline: none;
-    }
-  }
-
-  .auth-button,
-  .send-sms-button {
-    width: 100%;
-    height: 42px;
-    float: left;
-    margin-bottom: 20px;
-    font-size: 16px;
-    border: 1px solid #eeeeee;
-    text-align: center;
-    outline: none;
-    background-color: #eeeeee;
-    color: #bbbbbb;
-    border-radius: 4px;
-
-    &.active {
-      color: white;
-      background-color: $primary;
-      border: 1px solid$primary;
-
-      &:hover {
-        background-color: rgba($primary, 0.8);
-      }
-    }
-  }
-
-  .send-sms-button {
-    width: 120px;
-  }
-
   .other-buttons {
     width: 100%;
     height: auto;

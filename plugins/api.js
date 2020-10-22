@@ -29,6 +29,12 @@ export default ({ app: { $request } }, inject) => {
             Detail() {
                 return $request.get('/api/v2/member/detail');
             },
+            AvatarChange(params) {
+                return $request.post('/api/v2/member/detail/avatar', params);
+            },
+            MobileChange(params) {
+                return $request.post('/api/v2/member/detail/mobile', params);
+            },
             Courses(params) {
                 return $request.get('/api/v2/member/courses', params);
             },
