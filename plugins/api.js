@@ -94,6 +94,11 @@ export default ({ app: { $request } }, inject) => {
             Index() {
                 return $request.get('/api/v2/roles');
             }
+        },
+        Course: {
+            Index(params) {
+                return $request.get('/api/v2/courses', params);
+            }
         }
     })
 }

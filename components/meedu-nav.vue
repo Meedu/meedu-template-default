@@ -223,7 +223,7 @@ nav {
                 <nuxt-link to="/">首页</nuxt-link>
               </li>
               <li>
-                <nuxt-link to="/courses">全部课程</nuxt-link>
+                <nuxt-link to="/course">全部课程</nuxt-link>
               </li>
             </ul>
           </div>

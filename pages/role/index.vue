@@ -178,6 +178,11 @@
 <script>
 export default {
   middleware: ["user"],
+  head() {
+    return {
+      title: "VIP",
+    };
+  },
   layout: "app",
   async asyncData({ app }) {
     let list = await app.$api.Role.Index().then((res) => {

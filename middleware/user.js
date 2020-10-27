@@ -7,7 +7,7 @@ export default function (context) {
                 store.commit('auth/set', res.data);
             } else {
                 // 删除cookie
-                // app.$cookies.remove('token');
+                app.$cookies.remove('token');
             }
         })
     }
