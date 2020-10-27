@@ -82,13 +82,19 @@
       </div>
       <div class="col-12">
         <div class="courses-box">
-          <div class="course-item" v-for="course in list" :key="course.id">
-            <vod-course-item :course="course"></vod-course-item>
-          </div>
+          <template v-if="list.length > 0">
+            <div class="course-item" v-for="course in list" :key="course.id">
+              <vod-course-item :course="course"></vod-course-item>
+            </div>
+          </template>
+          <none v-else></none>
         </div>
+        <scroll
+          @load-more="getMore"
+          :loading="loading"
+          :over="loadOver"
+        ></scroll>
       </div>
-
-      <scroll @load-more="getMore" :loading="loading" :over="loadOver"></scroll>
     </div>
   </div>
 </template>
@@ -103,46 +109,37 @@ export default {
     };
   },
   async asyncData({ app, query }) {
-    let result = {
-      total: 0,
-      list: [],
-    };
-
     let scene = query.scene || "";
-    console.log(scene);
 
     let page = query.page;
     page = page ? page : 1;
     let data = await app.$api.Course.Index({
       page: page,
-      size: 16,
+      page_size: 16,
       scene: scene,
     }).then((res) => {
       if (res.code !== 0) {
-        return result;
+        return {};
       }
 
       return {
-        total: res.data.total,
         list: res.data.data,
       };
     });
 
     return {
-      total: data.total,
       list: data.list,
       scene: scene,
     };
   },
-  watchQuery: ["scene"],
+  watchQuery: true,
   data() {
     return {
       pagination: {
         page: 1,
-        size: 16,
+        page_size: 16,
       },
       list: [],
-      total: 0,
       scene: "",
       loading: false,
       loadOver: false,
@@ -158,7 +155,7 @@ export default {
       this.pagination.page++;
       this.$api.Course.Index({
         page: this.pagination.page,
-        size: this.pagination.size,
+        page_size: this.pagination.page_size,
         scene: this.scene,
       }).then((res) => {
         if (res.code !== 0) {

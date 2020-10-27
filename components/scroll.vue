@@ -25,6 +25,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       window.addEventListener("scroll", this.scrollHandler);
+      this.scrollHandler();
     });
   },
   beforeDestroy() {
@@ -34,7 +35,7 @@ export default {
     scrollHandler() {
       let scroll =
         this.getScrollTop() + this.getWindowHeight() - this.getScrollHeight();
-      if (scroll > -30 && this.loading === false) {
+      if (scroll > -60 && this.loading === false) {
         this.$emit("load-more");
       }
     },
