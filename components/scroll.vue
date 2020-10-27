@@ -34,7 +34,7 @@ export default {
     scrollHandler() {
       let scroll =
         this.getScrollTop() + this.getWindowHeight() - this.getScrollHeight();
-      if (scroll === 0 && this.loading === false) {
+      if (scroll > -30 && this.loading === false) {
         this.$emit("load-more");
       }
     },

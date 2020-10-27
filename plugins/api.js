@@ -98,6 +98,18 @@ export default ({ app: { $request } }, inject) => {
         Course: {
             Index(params) {
                 return $request.get('/api/v2/courses', params);
+            },
+            Detail(id) {
+                return $request.get('/api/v2/course/' + id);
+            },
+            Comments(id, params) {
+                return $request.get('/api/v2/course/' + id + '/comments', params);
+            },
+            SubmitComment(id, params) {
+                return $request.post('/api/v2/course/' + id + '/comment', params);
+            },
+            Like(id) {
+                return $request.get('/api/v2/course/' + id + '/like');
             }
         }
     })
